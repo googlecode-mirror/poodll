@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html<?php echo $direction ?>>
+<head>
+    <?php echo $meta ?>
+    <meta name="keywords" content="moodle, <?php echo $title ?> " />
+    <title><?php echo $title ?></title>
+    <link rel="shortcut icon" href="<?php echo $CFG->themewww .'/'. current_theme() ?>/favicon.ico" />
+    <?php include("$CFG->javascript"); ?>
+</head>
+
+<body<?php
+    echo " $bodytags";
+    if ($focus) {
+        echo " onload=\"setfocus()\"";
+    }
+    ?>>
+
+<div id="page">
+
+<?php 
+	if (file_exists($CFG->dirroot.'/logo.jpg')) {
+          $poodlllogo = $CFG->httpswwwroot.'/logo.jpg';
+      } else if (file_exists($CFG->dirroot.'/logo.gif')) {
+          $poodlllogo = $CFG->httpswwwroot.'/logo.gif';
+      } else if (file_exists($CFG->dataroot.'/1/logo.jpg')) {
+          require_once($CFG->libdir.'/filelib.php');
+          $poodlllogo = get_file_url('1/logo.jpg', null, 'httpscoursefile');
+      } else if (file_exists($CFG->dataroot.'/1/logo.gif')) {
+          require_once($CFG->libdir.'/filelib.php');
+          $poodlllogo = get_file_url('1/logo.gif', null, 'httpscoursefile');
+      } else {
+          $poodlllogo = $CFG->httpsthemewww .'/'. current_theme().'/logo.gif';
+      }
+
+	if ($home) {  // This is what gets printed on the home page only
+      
+	  
+      //Accessibility: warning: ALT text will need editing if logo changes. 'headermain' is now H1.
+?>
+    <?php print_container_start(true, '', 'header-home'); ?>
+        <h1 class="headermain"><img alt="Moodle" src="<?php echo $poodlllogo ?>" /></h1>
+        <div class="headermenu"><?php echo $menu ?></div>
+    <?php print_container_end(); ?>
+<?php } else if ($heading) {  // This is what gets printed on any other page with a heading
+?>
+    <?php print_container_start(true, '', 'header'); ?>
+		
+        <h1 class="headermain"><img alt="Moodle" src="<?php echo $poodlllogo ?>" /><!-- php echo $heading --></h1>
+        <div class="headermenu"><?php echo $menu ?></div>
+    <?php print_container_end(); ?>
+<?php } ?>
+<?php //Accessibility: breadcrumb trail/navbar now a DIV, not a table.
+      if ($navigation) { // This is the navigation table with breadcrumbs  ?>
+    <div class="navbar clearfix">
+        <div class="breadcrumb"><?php print_navigation($navigation); ?></div>
+        <div class="navbutton"><?php echo $button; ?></div>
+    </div>
+<?php } else if ($heading) { // If no navigation, but a heading, then print a line
+?>
+        <hr />
+<?php } ?>
+    <!-- END OF HEADER -->
+    <?php print_container_start(false, '', 'content'); ?>
+
+	<!-- Start of poodllwidgets poodllpairwork/screencast etc -->
+	<a name="POODLLANCHOR"></a>
+	<div id="poodllwidgets">
+		<!-- fetch our poodllheader-->
+		<?php require_once($CFG->libdir . '/poodllresourcelib.php'); ?>
+		<?php 
+			$currentcontext=get_context_instance(CONTEXT_COURSE, $COURSE->id);
+			if (has_capability('moodle/course:managefiles', $currentcontext)){	
+				$coursedataurl = urlencode($CFG->wwwroot . "/lib/poodlllogiclib.php?");
+				echo "<div class='adminconsole'><a href='" . fetch_poodllconsole($coursedataurl,$USER->id) . "' target='_new' >PoodLL Admin Console</a></div>" ;
+
+				//couldn't get next line to work, coursedataurl kept getting stripped of special chars, for now use above line Justin 20100217
+				//echo "&nbsp;<a href='" . $CFG->wwwroot . "/lib/poodlladminconsole.php?coursedataurl=" . 
+				//$coursedataurl . "&courseid=" . $COURSE->id . "&mename=" . $USER->id . "' target='_new'>newadmin</a>" ;
+			}
+		?>
+		<?php echo fetch_poodllheader() ;?>
+		<iframe id="poodllframe" name="poodllframe" src="about:blank" style="display: none; width: 100%; height: 200px;">&nbsp;</iframe>
+	</div>
+	<!-- End of poodllwidgets poodllpairwork/screencast etc -->
+    <div id="content">
