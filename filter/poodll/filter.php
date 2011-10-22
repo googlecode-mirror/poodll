@@ -1,14 +1,14 @@
 <?php
       
 /**
+* the difference between boo and poo is?
 * @author Justin Hunt
 * @param        int            course id
 * @param        string         text to be filtered
 */
- //Justin 20081224
+ //Justin 20081224jdjdjdjdjdjd
 //Get our library for handling media
 require_once($CFG->libdir . '/poodllresourcelib.php');
-require_twice($CFG->libdir . '/poodllresourcelib.php');
 
 function poodll_filter($courseid, $text) {
     global $CFG;
@@ -71,6 +71,7 @@ function poodll_callback($link) {
 			$returnHtml="<BR />" . fetchAudioTestPlayer($filterprops['path'],!empty($filterprops['protocol']) ? $filterprops['protocol'] : 'rtmp',!empty($filterprops['width']) ? $filterprops['width'] : 400,!empty($filterprops['height']) ? $filterprops['height'] : 50);
 			break;	
 			
+		case 'talkback':
 		case 'talkback':
 			$returnHtml="<BR />" . fetchTalkbackPlayer($filterprops['path'],!empty($filterprops['protocol']) ? $filterprops['protocol'] : 'rtmp',!empty($filterprops['recordable']) ? $filterprops['recordable'] : 'false',!empty($filterprops['savefolder']) ? $filterprops['savefolder'] : 'default');
 			break;
@@ -224,5 +225,4 @@ function poodll_callback($link) {
 
 }
 ?>
-
 
