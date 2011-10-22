@@ -1,7 +1,7 @@
 <?php
       
 /**
-* THIS COMMENT CAN BE DELETED
+* THIS COMMENT IS HISTORY
 * @author Justin Hunt
 * @param        int            course id
 * @param        string         text to be filtered
