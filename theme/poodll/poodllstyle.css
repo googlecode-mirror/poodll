@@ -1,0 +1,28 @@
+/**
+  *  Adds all the nice finish to the standard theme
+  *
+  */
+
+th.header,
+td.header,
+h1.header,
+h2.header,
+h3.header,
+div.header {     
+    background-image:url(gradient.jpg);     
+    background-position:top;    
+    background-repeat:repeat-x;     
+}
+
+.navbar {
+    background-image:url(gradient.jpg);     
+    background-position:top;    
+    background-repeat:repeat-x;     
+}
+
+.adminconsole {
+  width:100%;
+  text-align:right;
+  font-size:0.8em;
+  line-height:0.8em;
+}
