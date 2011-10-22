@@ -8,9 +8,7 @@
  //Justin 20081224
 //Get our library for handling media
 require_once($CFG->libdir . '/poodllresourcelib.php');
-
-
-
+require_twice($CFG->libdir . '/poodllresourcelib.php');
 
 function poodll_filter($courseid, $text) {
     global $CFG;
