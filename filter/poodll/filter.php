@@ -1,7 +1,6 @@
 <?php
       
 /**
-* the difference between boo and poo is?
 * @author Justin Hunt
 * @param        int            course id
 * @param        string         text to be filtered
