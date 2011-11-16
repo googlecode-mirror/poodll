@@ -467,7 +467,10 @@ if(!empty($_POST['saveflvvoice'])){
 		if ($CFG->filter_poodll_forum_video) {
 			$toFilterText = '{POODLL:type=video,path='.$fullpath.'}';
 		}else{
-			$toFilterText = '{POODLL:type=audio,protocol=rtmp,path='.$fullpath.'}';
+			//We 'embed' by default from now. This is because a large of number of players loaded on a single page can crash a browser.
+			//$toFilterText = '{POODLL:type=audio,protocol=rtmp,path='.$fullpath.'}';
+			$toFilterText = '{POODLL:type=audio,embed=true,protocol=rtmp,path='.$fullpath.'}';
+			
 		}		
 	  
 	    $fromform->format   = 0;
